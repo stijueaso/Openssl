@@ -221,7 +221,7 @@ static int module_run(const CONF *cnf, char *name, char *value,
         if (!(flags & CONF_MFLAGS_SILENT)) {
             char rcode[DECIMAL_SIZE(ret) + 1];
             CONFerr(CONF_F_MODULE_RUN, CONF_R_MODULE_INITIALIZATION_ERROR);
-            BIO_snprintf(rcode, sizeof rcode, "%-8d", ret);
+            BIO_snprintf(rcode, sizeof(rcode), "%-8d", ret);
             ERR_add_error_data(6, "module=", name, ", value=", value,
                                ", retcode=", rcode);
         }
@@ -530,7 +530,7 @@ char *CONF_get1_default_config_file(void)
     char *file;
     int len;
 
-    file = getenv("OPENSSL_CONF");
+    file = ossl_safe_getenv("OPENSSL_CONF");
     if (file)
         return BUF_strdup(file);
 
